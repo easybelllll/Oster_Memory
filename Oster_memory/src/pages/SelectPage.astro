@@ -2,20 +2,25 @@
 import Popup from "../components/Popup.astro";
 import Button from "../components/Button.astro";
 ---
+<html>
+<head>
+    <script src="/global.js" is:inline></script>
+</head>
 
 <div id="select" class="page">
   <Popup>
     <h2>Mit wie vielen Karten möchtest du spielen?</h2>
 
-    <Button text="12 Karten" action="startGameGlobal" value="12" />
-    <Button text="16 Karten" action="startGameGlobal" value="16" />
-    <Button text="24 Karten" action="startGameGlobal" value="24" />
+    <Button onclick="showPage('game')" text="12 Karten" action="startGameGlobal" value="12" />
+    <Button onclick="showPage('game')" text="16 Karten" action="startGameGlobal" value="16" />
+    <Button onclick="showPage('game')" text="24 Karten" action="startGameGlobal" value="24" />
     <div class="back-button">
-      <Button text="Zurück" action="showPage" value="start" outline />
+      <Button onclick="showPage('start')" text="Zurück" action="showPage" value="start" outline />
     </div>
   </Popup>
 
 </div>
+</html>
 
 <style>
   .page {
