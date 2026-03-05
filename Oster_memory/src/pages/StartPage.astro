@@ -1,29 +1,53 @@
 ---
-import Popup from '../components/Popup.astro';
-import Button from '../components/Button.astro';
-import Decoration from '../components/Decoration.astro';
+
+import Popup from "../components/Popup.astro";
+import Button from "../components/Button.astro";
+import DekoImg from "../../public/Dekoration/decoration.png";
+import { Image } from "astro:assets";
 ---
-
+<html>
+<head>
+    <script src="/global.js" is:inline></script>
+</head>
 <div id="start" class="page active">
-  <Popup>
-    <h1>Oster-Memory</h1>
-    <p>Finde alle passenden Osterpaare</p>
+    <Popup>
+        <h1>Oster-Memory</h1>
+        <p>Finde alle passenden Osterpaare</p>
 
-    <Button type="button" text="Spiel starten" action="showPage" value="select" />
-    <Button type="button"text="Rangliste anschauen" action="showPage" value="leaderboardSelect" outline />
-  </Popup>
-
-  <Decoration src="/img/decoration.png" className="bottom-decoration" />
+        <Button onclick="showPage('select')" text="Spiel starten" value="select" />
+        <Button
+            onclick="showPage('leaderboardSelect')"
+            text="Rangliste anschauen"
+            value="leaderboardSelect"
+            outline
+        />
+    </Popup>
+    <Image
+        src={DekoImg}
+        alt="Osterdekoration"
+        class="bottom-decoration"
+    />
 </div>
+</html>
 
 <style>
-.page {
-  display: none;
-  min-height: 100vh;
-  justify-content: center;
-  align-items: center;
-}
-.page.active {
-  display: flex;
-}
+    .page {
+        display: none;
+        min-height: 100vh;
+        justify-content: center;
+        align-items: center;
+    }
+    .page.active {
+        display: flex;
+    }
+
+    .bottom-decoration {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        pointer-events: none;
+        object-fit: cover;
+    }
 </style>

@@ -1,9 +1,14 @@
 ---
-const { text, outline = false, action, value } = Astro.props;
+const props = Astro.props;
+const { buttonId, text, outline = false, action, value, type = "button" } = Astro.props;
 ---
 <button
+{...props}
+id={buttonId}
+type={type}
   class={outline ? 'btn-outline-pink' : 'btn'} 
-  onclick={`window.${action}('${value}')`}
+  data-action={action}
+  data-value={value}
 >
   {text}
 </button>
