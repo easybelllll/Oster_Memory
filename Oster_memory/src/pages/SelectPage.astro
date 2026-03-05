@@ -1,0 +1,33 @@
+---
+import Popup from "../components/Popup.astro";
+import Button from "../components/Button.astro";
+import Decoration from "../components/Decoration.astro";
+---
+
+<div id="select" class="page">
+  <Popup>
+    <h2>Mit wie vielen Karten möchtest du spielen?</h2>
+
+    <Button text="12 Karten" action="startGameGlobal" value="12" />
+    <Button text="16 Karten" action="startGameGlobal" value="16" />
+    <Button text="24 Karten" action="startGameGlobal" value="24" />
+    <div class="back-button">
+      <Button text="Zurück" action="showPage" value="start" outline />
+    </div>
+  </Popup>
+
+  <Decoration src="/img/Gras.png" className="bottom-grass" />
+</div>
+
+<style>
+  .page {
+    display: none;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .page.active {
+    display: flex;
+  }
+</style>

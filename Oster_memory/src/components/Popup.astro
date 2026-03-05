@@ -1,0 +1,24 @@
+---
+const { children } = Astro.slots;
+---
+<div class="popup"><slot /></div>
+
+<style>
+.popup{
+  background:white;
+  padding:40px;
+  border-radius:25px;
+  max-width:800px;
+  margin:auto;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  text-align:center;
+}
+.popup input{
+  width:80%;
+  margin:10px auto;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  display:block;
+}
+</style>

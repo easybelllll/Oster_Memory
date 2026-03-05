@@ -1,0 +1,31 @@
+---
+const { text, outline = false, action, value } = Astro.props;
+---
+<button
+  class={outline ? 'btn-outline-pink' : 'btn'} 
+  onclick={`window.${action}('${value}')`}
+>
+  {text}
+</button>
+
+<style>
+button {
+  background: #e98989;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 20px;
+  margin: 10px;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+  transition: 0.2s;
+}
+button:hover {
+  transform: scale(1.05);
+}
+.btn-outline-pink {
+  background: white;
+  color: #e98989;
+  border: 2px solid #e98989;
+}
+</style>

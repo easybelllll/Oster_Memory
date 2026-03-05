@@ -1,0 +1,29 @@
+---
+import Popup from '../components/Popup.astro';
+import Button from '../components/Button.astro';
+import Decoration from '../components/Decoration.astro';
+---
+
+<div id="start" class="page active">
+  <Popup>
+    <h1>Oster-Memory</h1>
+    <p>Finde alle passenden Osterpaare</p>
+
+    <Button type="button" text="Spiel starten" action="showPage" value="select" />
+    <Button type="button"text="Rangliste anschauen" action="showPage" value="leaderboardSelect" outline />
+  </Popup>
+
+  <Decoration src="/img/decoration.png" className="bottom-decoration" />
+</div>
+
+<style>
+.page {
+  display: none;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.page.active {
+  display: flex;
+}
+</style>
