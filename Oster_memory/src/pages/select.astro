@@ -1,0 +1,46 @@
+---
+import "../../public/global.css";
+import Popup from "../components/Popup.astro";
+import Button from "../components/Button.astro";
+import DekoImg from "../../public/Dekoration/Gras.png";
+import { Image } from "astro:assets";
+import LinkButton from "../components/LinkButton.astro";
+import Layout from "../layout/layout.astro";
+---
+
+<Layout>
+  <Popup>
+    <h2>Mit wie vielen Karten möchtest du spielen?</h2>
+
+    <div class="button-wrap">
+      <Button
+        onclick="showPage('game')"
+        text="12 Karten"
+        action="startGameGlobal"
+        value="12"
+      />
+      <Button
+        onclick="showPage('game')"
+        text="16 Karten"
+        action="startGameGlobal"
+        value="16"
+      />
+      <Button
+        onclick="showPage('game')"
+        text="24 Karten"
+        action="startGameGlobal"
+        value="24"
+      />
+    </div>
+    <div class="back-button">
+      <LinkButton href="/" text="Zurück" outline />
+    </div>
+  </Popup>
+  <Image src={DekoImg} alt="Osterdekoration" class="bottom-decoration" />
+</Layout>
+
+<style>
+  .back-button {
+    margin-top: 8px;
+  }
+</style>

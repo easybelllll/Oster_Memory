@@ -1,0 +1,40 @@
+---
+import Card from "./card.astro";
+
+const {size = 16 } = Astro.props;
+
+const images = [
+  "/Eier/Eier1.png",
+  "/Eier/Eier2.png",
+  "/Eier/Eier3.png",
+  "/Eier/Eier4.png",
+
+  "/Hase/Hase1.png",
+  "/Hase/Hase2.png",
+  "/Hase/Karotten.png",
+
+  "/Korb/Osterkorb1.png",
+  "/Korb/Osterkorb2.png",
+
+  "/Kueken/Kueken1.png",
+  "/Kueken/Kueken2.png",
+
+  "/Tulpen/Tulpen.png"
+];
+
+//mischen 
+images.sort(() => Math.random() - 0.5);
+---
+<div class="board">
+  {images.map (card => (<Card img={card} pair={card}/> 
+  ))}
+
+</div>
+
+<style>
+.board {    
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 30px;
+}

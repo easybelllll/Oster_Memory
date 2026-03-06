@@ -1,22 +1,27 @@
 ---
-import Layout from '../layout/layout.astro';
-import StartPage from './StartPage.astro';
-import SelectPage from './SelectPage.astro';
-import GamePage from './GamePage.astro';
-import EndPage from './EndPage.astro';
-import LoginPage from './LoginPage.astro';
-import LeaderboardSelectPage from './LeaderboardSelectPage.astro';
-import LeaderboardPage from './LeaderboardPage.astro';
-
+import Popup from "../components/Popup.astro";
+import Button from "../components/Button.astro";
+import DekoImg from "../../public/Dekoration/decoration.png";
+import { Image } from "astro:assets";
+import LinkButton from "../components/LinkButton.astro";
+import Layout from "../layout/layout.astro";
+import "../../public/global.css";
 ---
 
 <Layout>
-  <StartPage />
-  <SelectPage />
-  <GamePage />
-  <EndPage />
-  <LoginPage />
-  <LeaderboardSelectPage />
-  <LeaderboardPage />
-</Layout>
+    <Popup>
+        <h1>Oster-Memory</h1>
+        <p>Finde alle passenden Osterpaare</p>
 
+        <div class="button-wrap">
+            <LinkButton href="/select" text="Spiel starten" />
+            <Button
+                onclick="showPage('leaderboardSelect')"
+                text="Rangliste anschauen"
+                value="leaderboardSelect"
+                outline
+            />
+        </div>
+    </Popup>
+    <Image src={DekoImg} alt="Osterdekoration" class="bottom-decoration" />
+</Layout>

@@ -1,28 +1,16 @@
 ---
 const props = Astro.props;
-const {
-  buttonId,
-  text,
-  outline = false,
-  action,
-  value,
-  type = "button",
-} = Astro.props;
+const { href, text, outline = false, type = "button" } = Astro.props;
 ---
 
-<button
-  {...props}
-  id={buttonId}
-  type={type}
-  class={outline ? "btn-outline-pink" : "btn"}
-  data-action={action}
-  data-value={value}
->
+<a {...props} class={outline ? "btn btn-outline-pink" : "btn"}>
   {text}
-</button>
+</a>
 
 <style>
-  button {
+  .btn {
+    display: block;
+    text-decoration: none;
     background: #e98989;
     border: none;
     padding: 12px 20px;
@@ -32,7 +20,7 @@ const {
     font-size: 16px;
     transition: 0.2s;
   }
-  button:hover {
+  .btn:hover {
     transform: scale(1.05);
   }
   .btn-outline-pink {
