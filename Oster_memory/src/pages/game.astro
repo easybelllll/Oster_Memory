@@ -3,11 +3,11 @@ import Layout from "../layout/layout.astro";
 import Board from "../components/Board.astro";
 import Sidebar from "../components/Sidebar.astro";
 import { undefined } from "astro:schema";
+import "../../public/global.css";
 
 const cardsParam = Number(Astro.url.searchParams.get("cards"));
 const size = [12, 16, 24].includes(cardsParam) ? cardsParam : 16;
 
-// Sidebar links
 const sidebarLinks = [{ text: "Beenden", href: `/` }];
 ---
 
