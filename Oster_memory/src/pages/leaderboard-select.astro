@@ -1,0 +1,26 @@
+---
+import Popup from "../components/Popup.astro";
+import Button from "../components/Button.astro";
+import DekoImg from "../../public/Dekoration/gras.png";
+import { Image } from "astro:assets";
+import Layout from "../layout/layout.astro";
+import "../../public/global.css";
+import LinkButton from "../components/LinkButton.astro";
+---
+
+<Layout>
+    <div id="leaderboardSelect" class="page">
+        <Popup>
+            <h2>Welche Rangliste möchtest du sehen?</h2>
+
+            <div class="button-wrap">
+                <LinkButton href="/leaderboard" text="12 Karten" />
+                <LinkButton href="/leaderboard" text="16 Karten" />
+                <LinkButton href="/leaderboard" text="24 Karten" />
+                <br />
+                <LinkButton href="/" text="Zurück" outline />
+            </div>
+        </Popup>
+        <Image src={DekoImg} alt="Osterdekoration" class="bottom-decoration" />
+    </div>
+</Layout>
