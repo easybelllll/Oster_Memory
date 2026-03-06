@@ -1,55 +1,45 @@
 ---
 import Card from "./card.astro";
-
-const cardsParam = Number(Astro.url.searchParams.get("cards"));
-const size = [12, 16, 24].includes(cardsParam) ? cardsParam : 16;
+const { size = 16 } = Astro.props;
 
 const allImages = [
   "/Eier/Eier1.png",
   "/Eier/Eier2.png",
   "/Eier/Eier3.png",
   "/Eier/Eier4.png",
-
   "/Hase/Hase1.png",
   "/Hase/Hase2.png",
   "/Hase/Karotten.png",
-
   "/Korb/Osterkorb1.png",
   "/Korb/Osterkorb2.png",
-
   "/Kueken/Kueken1.png",
   "/Kueken/Kueken2.png",
-
   "/Tulpen/Tulpen.png",
 ];
 
-// how many pairs we need
 const pairCount = size / 2;
-
-// shuffle images
 const shuffled = [...allImages].sort(() => Math.random() - 0.5);
-
-// take only needed pairs
 const selected = shuffled.slice(0, pairCount);
+const cards = [...selected, ...selected].sort(() => Math.random() - 0.5);
 
-// duplicate for pairs
-const cards = [...selected, ...selected];
-
-// shuffle again
-cards.sort(() => Math.random() - 0.5);
-
-// dynamic columns
 const columns = size === 24 ? 6 : 4;
 ---
 
-<div class="board" style={`grid-template-columns: repeat(${columns}, 1fr)`}>
+<div
+  class="board"
+  style={`grid-template-columns: repeat(${columns}, 1fr)`}
+  id="board"
+>
   {cards.map((card) => <Card img={card} pair={card} />)}
 </div>
 
 <style>
   .board {
     display: grid;
-    gap: 20px;
-    padding: 30px;
+    padding: 20px;
+    justify-content: center;
+    background: white;
+    flex: 1;
+    margin: 0 auto;
   }
 </style>

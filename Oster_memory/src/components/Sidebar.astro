@@ -1,8 +1,24 @@
 ---
+import LinkButton from "./LinkButton.astro";
+
 const { links = [] } = Astro.props;
 ---
 
 <aside class="sidebar">
+  <!-- Top button(s) -->
+  <div class="sidebar-buttons top">
+    {
+      links.map((link: { href: any; text: any; outline: any }) => (
+        <LinkButton
+          href={link.href ?? "#"}
+          text={link.text}
+          outline={link.outline}
+        />
+      ))
+    }
+  </div>
+
+  <!-- Game info below -->
   <div class="game-info">
     <p>Züge</p>
     <span id="moves">0</span>
@@ -10,74 +26,38 @@ const { links = [] } = Astro.props;
     <p>Zeit</p>
     <span id="time">0</span>
   </div>
-
-  <div class="sidebar-buttons">
-    {
-      links.map((link: { href: any; outline: any; text: unknown }) => (
-        <a
-          href={link.href ?? "#"}
-          class={link.outline ? "btn-outline-pink" : "btn"}
-        >
-          {link.text}
-        </a>
-      ))
-    }
-  </div>
 </aside>
 
 <style>
   .sidebar {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-
+    justify-content: flex-start;
     padding: 20px;
     background: #f8e88c;
     border-right: 1px solid #e0cfcf;
-
     min-width: 200px;
     height: 100vh;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  .sidebar-buttons.top,
+  .game-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .game-info {
+    text-align: center;
     font-size: 18px;
   }
 
   .game-info span {
     display: block;
     font-size: 24px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     font-weight: bold;
-  }
-
-  .sidebar-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .sidebar-buttons a {
-    text-decoration: none;
-    text-align: center;
-
-    background: #e98989;
-    color: white;
-    padding: 12px 20px;
-
-    border-radius: 20px;
-    font-size: 16px;
-
-    transition: transform 0.2s;
-  }
-
-  .sidebar-buttons a:hover {
-    transform: scale(1.05);
-  }
-
-  .btn-outline-pink {
-    background: white;
-    color: #e98989;
-    border: 2px solid #e98989;
   }
 </style>

@@ -9,34 +9,28 @@ let pairs = 0;
 let timer;
 
 document.addEventListener("DOMContentLoaded", () => {
-
-  const cards = document.querySelectorAll(".js-card");
+  const cards = document.querySelectorAll(".card js-card");
   const totalCards = cards.length;
 
   const movesSpan = document.getElementById("moves");
   const timeSpan = document.getElementById("time");
 
-  startTimer();
+  startTimer(timeSpan);
 
   cards.forEach(card => {
     card.addEventListener("click", () => flipCard(card, totalCards, movesSpan));
   });
-
 });
 
-function startTimer() {
+function startTimer(timeSpan) {
   timer = setInterval(() => {
     time++;
-    const timeSpan = document.getElementById("time");
     if (timeSpan) timeSpan.textContent = time;
   }, 1000);
 }
 
 function flipCard(card, totalCards, movesSpan) {
-
-  if (lock) return;
-  if (card.classList.contains("flipped")) return;
-  if (card.classList.contains("matched")) return;
+  if (lock || card.classList.contains("flipped") || card.classList.contains("matched")) return;
 
   card.classList.add("flipped");
 
@@ -46,7 +40,6 @@ function flipCard(card, totalCards, movesSpan) {
   }
 
   secondCard = card;
-
   moves++;
   if (movesSpan) movesSpan.textContent = moves;
 
@@ -54,35 +47,21 @@ function flipCard(card, totalCards, movesSpan) {
 }
 
 function checkMatch(totalCards) {
-
   lock = true;
 
   if (firstCard.dataset.value === secondCard.dataset.value) {
-
     pairs++;
-
     setTimeout(() => {
-
       firstCard.classList.add("matched");
       secondCard.classList.add("matched");
-
       resetTurn();
-
-      if (pairs * 2 === totalCards) {
-        endGame();
-      }
-
+      if (pairs * 2 === totalCards) endGame();
     }, 400);
-
   } else {
-
     setTimeout(() => {
-
       firstCard.classList.remove("flipped");
       secondCard.classList.remove("flipped");
-
       resetTurn();
-
     }, 700);
   }
 }
