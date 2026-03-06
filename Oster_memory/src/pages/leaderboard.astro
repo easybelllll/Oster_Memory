@@ -5,6 +5,7 @@ import DekoImg from "../../public/Dekoration/gras.png";
 import { Image } from "astro:assets";
 import Layout from "../layout/layout.astro";
 import "../../public/global.css";
+import LinkButton from "../components/LinkButton.astro";
 ---
 
 <Layout>
@@ -22,35 +23,41 @@ import "../../public/global.css";
                 <tbody></tbody>
             </table>
             <br />
-            <Button
-                class="btn-outline-pink"
-                onclick="showPage('leaderboardSelect')"
-                text="Andere Rangliste wählen"
+            <div class="button-wrap">
+                <LinkButton
+                    href="/leaderboard-select"
+                    text="Andere Rangliste wählen"
+                    outline
+                />
+            </div>
+            <Image
+                src={DekoImg}
+                alt="Osterdekoration"
+                class="bottom-decoration"
             />
         </Popup>
-        <Image src={DekoImg} alt="Osterdekoration" class="bottom-decoration" />
-    </div>
 
-    <style>
-        #leaderboardTable {
-            border-collapse: separate;
-            border-spacing: 10px;
-            width: fit-content;
-            margin: 20px auto;
-        }
-        #leaderboardTable thead th {
-            background: #e98989;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            text-align: center;
-            min-width: 80px;
-        }
-        #leaderboardTable tbody td {
-            text-align: center;
-            padding: 8px 12px;
-            font-weight: bold;
-        }
-    </style>
+        <style>
+            #leaderboardTable {
+                border-collapse: separate;
+                border-spacing: 10px;
+                width: fit-content;
+                margin: 20px auto;
+            }
+            #leaderboardTable thead th {
+                background: #e98989;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 20px;
+                font-weight: bold;
+                text-align: center;
+                min-width: 80px;
+            }
+            #leaderboardTable tbody td {
+                text-align: center;
+                padding: 8px 12px;
+                font-weight: bold;
+            }
+        </style>
+    </div>
 </Layout>

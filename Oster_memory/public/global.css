@@ -25,6 +25,14 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  justify-content: center;
+}
+
+.back-button {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+
 }
 
 @media screen and (min-width: 481px) {
