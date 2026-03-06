@@ -2,7 +2,7 @@
     "folder-color.pathColors": [
         {
             "folderPath": "Oster_Memory/Oster_memory/src/components/",
-            "color": "foldercolorizer.color_6666cc"
+            "color": "foldercolorizer.color_6699cc"
         },
         {
             "folderPath": "Oster_Memory/Oster_memory/src/assets/",
@@ -10,7 +10,11 @@
         },
         {
             "folderPath": "Oster_Memory/Oster_memory/src/pages/",
-            "color": "foldercolorizer.color_0066ff"
+            "color": "foldercolorizer.color_ff33cc"
+        },
+        {
+            "folderPath": "Oster_Memory/Oster_memory/src/layout/",
+            "color": "foldercolorizer.color_009900"
         }
     ]
 }

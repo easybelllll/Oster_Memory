@@ -18,7 +18,11 @@ import { Image } from "astro:assets";
         <Button class="btn-outline-pink" onclick="showPage('start')" text="Zurück" />
     </Popup>
     </div>
-    <img src="/img/Gras.png" class="bottom-grass" />
+    <Image
+        src={DekoImg}
+        alt="Osterdekoration"
+        class="bottom-decoration"
+    />
 </div>
 </html>
 <style>
@@ -31,5 +35,13 @@ import { Image } from "astro:assets";
     .page.active {
         display: flex;
     }
-
+.bottom-decoration {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        pointer-events: none;
+        object-fit: cover;
+    }
 </style>

@@ -1,6 +1,8 @@
 ---
 import Popup from "../components/Popup.astro";
 import Button from "../components/Button.astro";
+import DekoImg from "../../public/Dekoration/Gras.png";
+import { Image } from "astro:assets";
 ---
 <html>
 <head>
@@ -18,7 +20,11 @@ import Button from "../components/Button.astro";
       <Button onclick="showPage('start')" text="Zurück" action="showPage" value="start" outline />
     </div>
   </Popup>
-
+<Image
+        src={DekoImg}
+        alt="Osterdekoration"
+        class="bottom-decoration"
+    />
 </div>
 </html>
 
@@ -33,4 +39,13 @@ import Button from "../components/Button.astro";
   .page.active {
     display: flex;
   }
+  .bottom-decoration {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        pointer-events: none;
+        object-fit: cover;
+    }
 </style>
