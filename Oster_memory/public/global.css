@@ -40,3 +40,10 @@ body {
     flex-direction: row;
   }
 }
+
+.board {
+  display: grid;
+  gap: 20px;
+  padding: 30px;
+  justify-content: center;
+}

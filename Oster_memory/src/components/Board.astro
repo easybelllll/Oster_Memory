@@ -1,9 +1,10 @@
 ---
 import Card from "./card.astro";
 
-const {size = 16 } = Astro.props;
+const cardsParam = Number(Astro.url.searchParams.get("cards"));
+const size = [12, 16, 24].includes(cardsParam) ? cardsParam : 16;
 
-const images = [
+const allImages = [
   "/Eier/Eier1.png",
   "/Eier/Eier2.png",
   "/Eier/Eier3.png",
@@ -19,22 +20,36 @@ const images = [
   "/Kueken/Kueken1.png",
   "/Kueken/Kueken2.png",
 
-  "/Tulpen/Tulpen.png"
+  "/Tulpen/Tulpen.png",
 ];
 
-//mischen 
-images.sort(() => Math.random() - 0.5);
----
-<div class="board">
-  {images.map (card => (<Card img={card} pair={card}/> 
-  ))}
+// how many pairs we need
+const pairCount = size / 2;
 
+// shuffle images
+const shuffled = [...allImages].sort(() => Math.random() - 0.5);
+
+// take only needed pairs
+const selected = shuffled.slice(0, pairCount);
+
+// duplicate for pairs
+const cards = [...selected, ...selected];
+
+// shuffle again
+cards.sort(() => Math.random() - 0.5);
+
+// dynamic columns
+const columns = size === 24 ? 6 : 4;
+---
+
+<div class="board" style={`grid-template-columns: repeat(${columns}, 1fr)`}>
+  {cards.map((card) => <Card img={card} pair={card} />)}
 </div>
 
 <style>
-.board {    
+  .board {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding: 30px;
-}
+  }
+</style>

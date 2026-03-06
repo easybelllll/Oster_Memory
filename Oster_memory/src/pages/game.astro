@@ -1,0 +1,37 @@
+---
+import Layout from "../layout/layout.astro";
+import Board from "../components/Board.astro";
+import Sidebar from "../components/Sidebar.astro";
+
+const cardsParam = Number(Astro.url.searchParams.get("cards"));
+const size = [12, 16, 24].includes(cardsParam) ? cardsParam : 16;
+
+// Sidebar links
+const sidebarLinks = [{ text: "Beenden", href: `/  ` }];
+---
+
+<Layout>
+    <div class="game-page">
+        <!-- Sidebar -->
+        <Sidebar links={sidebarLinks} />
+
+        <!-- Board -->
+        <Board size={size} />
+    </div>
+</Layout>
+
+<style>
+    .game-page {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        min-height: 100vh;
+        width: 100vw;
+    }
+
+    .board {
+        flex: 1;
+        max-width: 1000px;
+        padding: 20px;
+    }
+</style>
