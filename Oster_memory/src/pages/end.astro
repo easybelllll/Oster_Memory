@@ -1,25 +1,35 @@
-<div id="end" class="page">
-    <div class="popup">
-        <h2>GLÜCKWUNSCH! 🎉</h2>
-        <p>Zeit: <span id="endTime">0</span> Sekunden</p>
-        <p>Züge: <span id="endMoves">0</span></p>
-        <button onclick="showPage('start')">Erneut spielen</button>
-        <button class="btn-outline-pink" onclick="showPage('login')"
-            >In Rangliste speichern</button
-        >
+---
+import Layout from "../layout/layout.astro";
+import Popup from "../components/Popup.astro";
+import "../../public/global.css";
+import LinkButton from "../components/LinkButton.astro";
+
+const time = Astro.url.searchParams.get("time") ?? 0;
+const moves = Astro.url.searchParams.get("moves") ?? 0;
+---
+
+<Layout>
+    <div class="end-page">
+        <Popup>
+            <h2>GLÜCKWUNSCH! 🎉</h2>
+
+            <p>Zeit: <span>{time}</span> Sekunden</p>
+            <p>Züge: <span>{moves}</span></p>
+
+            <LinkButton href="/" text="Erneut spielen" />
+            <LinkButton href="/leaderboard" text="In Rangliste speichern" />
+        </Popup>
+
+        <img src="/img/Gras.png" class="bottom-grass" />
     </div>
-    <img src="/img/Gras.png" class="bottom-grass" />
-</div>
+</Layout>
 
 <style>
-    .page {
-        display: none;
-        min-height: 100vh;
+    .end-page {
+        display: flex;
         justify-content: center;
         align-items: center;
+        min-height: 100vh;
+        width: 100vw;
     }
-    .page.active {
-        display: flex;
-    }
-    
 </style>

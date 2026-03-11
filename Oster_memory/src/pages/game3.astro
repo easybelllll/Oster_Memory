@@ -2,19 +2,17 @@
 import Layout from "../layout/layout.astro";
 import Board from "../components/Board.astro";
 import Sidebar from "../components/Sidebar.astro";
-import { undefined } from "astro:schema";
 import "../../public/global.css";
 
-const cardsParam = Number(Astro.url.searchParams.get("cards"));
-const size = [12, 16, 24].includes(cardsParam) ? cardsParam : 16;
-
+// Sidebar-Link zum Beenden
 const sidebarLinks = [{ text: "Beenden", href: `/` }];
 ---
 
 <Layout>
     <div class="game-page">
         <Sidebar links={sidebarLinks} />
-        <Board size={size} />
+        <!-- Board bekommt direkt die Größe -->
+        <Board size={24} />
     </div>
 </Layout>
 

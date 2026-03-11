@@ -1,0 +1,28 @@
+---
+import Layout from "../layout/layout.astro";
+import Board from "../components/Board.astro";
+import Sidebar from "../components/Sidebar.astro";
+import "../../public/global.css";
+
+// Sidebar-Link zum Beenden
+const sidebarLinks = [{ text: "Beenden", href: `/` }];
+---
+
+<Layout>
+    <div class="game-page">
+        <Sidebar links={sidebarLinks} />
+        <!-- Board bekommt direkt die Größe -->
+        <Board size={16} />
+    </div>
+</Layout>
+
+<style>
+    .game-page {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+        width: 100vw;
+        background: white;
+    }
+</style>
