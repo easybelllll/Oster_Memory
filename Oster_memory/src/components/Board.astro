@@ -41,36 +41,35 @@ const columns = size === 24 ? 6 : 4;
     background: white;
     flex: 1;
     margin: 0 auto;
+    gap: 15px;
   }
 </style>
 
 <script is:inline>
-  // Variablen
   let firstCard = null;
   let secondCard = null;
   let lock = false;
-
-  let moves = 0;
-  let time = 0;
   let pairs = 0;
-  let timer;
 
-  // Timer starten
+  let time = 0;
+  let moves = 0;
+  let timer = null;
+  let firstClick = false; // Timer startet erst beim ersten Klick
+
+  const timeEl = document.getElementById("time");
+  const movesEl = document.getElementById("moves");
+
   function startTimer() {
     timer = setInterval(() => {
       time++;
+      if (timeEl) timeEl.textContent = time;
     }, 1000);
   }
 
-  // Spiel beenden
-  function endGame() {
-    clearInterval(timer); // Timer stoppen
-    localStorage.setItem("endTime", time); // Zeit speichern
-    localStorage.setItem("endMoves", moves); // Züge speichern
-    window.location.href = "/end"; // Endseite anzeigen
+  function stopTimer() {
+    clearInterval(timer);
   }
 
-  // Karten umdrehen
   function flipCard(card) {
     if (
       lock ||
@@ -78,6 +77,11 @@ const columns = size === 24 ? 6 : 4;
       card.classList.contains("matched")
     )
       return;
+
+    if (!firstClick) {
+      startTimer(); // Timer beim ersten Klick starten
+      firstClick = true;
+    }
 
     card.classList.add("flipped");
 
@@ -87,7 +91,10 @@ const columns = size === 24 ? 6 : 4;
     }
 
     secondCard = card;
+
+    // Moves erhöhen
     moves++;
+    if (movesEl) movesEl.textContent = moves;
 
     if (firstCard.dataset.value === secondCard.dataset.value) {
       pairs++;
@@ -95,9 +102,14 @@ const columns = size === 24 ? 6 : 4;
       secondCard.classList.add("matched");
       resetTurn();
 
-      // Prüfen, ob alle Paare gefunden wurden
       if (pairs === pairCount) {
-        setTimeout(endGame, 500); // kleine Verzögerung für Animation
+        stopTimer(); // Timer stoppen
+        const endUrl = new URL("/end", window.location.origin);
+        endUrl.searchParams.set("time", time);
+        endUrl.searchParams.set("moves", moves);
+        setTimeout(() => {
+          window.location.href = endUrl.toString();
+        }, 500); // kleine Verzögerung für Animation
       }
     } else {
       lock = true;
@@ -115,13 +127,9 @@ const columns = size === 24 ? 6 : 4;
     lock = false;
   }
 
-  // Eventlistener setzen, sobald DOM fertig ist
   window.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".js-card").forEach((card) => {
       card.addEventListener("click", () => flipCard(card));
     });
   });
-
-  // Timer starten
-  startTimer();
 </script>
