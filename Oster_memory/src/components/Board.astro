@@ -1,6 +1,6 @@
 ---
 import Card from "./Card.astro";
-const { size = 16 } = Astro.props;
+const { size = 16, anzPair } = Astro.props;
 
 // Bilderpfade aus /public
 const allImages = [
@@ -29,7 +29,11 @@ const cards = [...selected, ...selected].sort(() => Math.random() - 0.5);
 const columns = size === 24 ? 6 : 4;
 ---
 
-<div class="board" style={`grid-template-columns: repeat(${columns}, 1fr)`}>
+<div
+  class="board"
+  data-paircount={pairCount}
+  style={`grid-template-columns: repeat(${columns}, 1fr)`}
+>
   {cards.map((card) => <Card img={card} pair={card} />)}
 </div>
 
@@ -102,7 +106,7 @@ const columns = size === 24 ? 6 : 4;
       secondCard.classList.add("matched");
       resetTurn();
 
-      if (pairs === pairCount) {
+      if (pairs === anzPairs) {
         stopTimer(); // Timer stoppen
         const endUrl = new URL("/end", window.location.origin);
         endUrl.searchParams.set("time", time);

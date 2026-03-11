@@ -18,7 +18,6 @@ const { links = [] } = Astro.props;
     }
   </div>
 
-  <!-- Game info below -->
   <div class="game-info">
     <p>Zeit</p>
     <span id="time">0</span>
@@ -26,48 +25,6 @@ const { links = [] } = Astro.props;
     <span id="moves">0</span>
   </div>
 </aside>
-
-<script is:inline>
-  let time = 0;
-  let moves = 0;
-  let timer = null;
-  let timerRunning = false; // startet erst beim ersten Klick
-
-  const timeEl = document.getElementById("time");
-  const movesEl = document.getElementById("moves");
-
-  // Timer starten
-  export function startTimer() {
-    if (!timerRunning) {
-      timerRunning = true;
-      timer = setInterval(() => {
-        time++;
-        timeEl.textContent = time;
-      }, 1000);
-    }
-  }
-
-  // Timer stoppen
-  export function stopTimer() {
-    clearInterval(timer);
-  }
-
-  // Move erhöhen
-  export function incrementMoves() {
-    moves++;
-    movesEl.textContent = moves;
-  }
-
-  // Optional: Reset
-  export function resetGameInfo() {
-    time = 0;
-    moves = 0;
-    timerRunning = false;
-    if (timer) clearInterval(timer);
-    timeEl.textContent = time;
-    movesEl.textContent = moves;
-  }
-</script>
 
 <style>
   .sidebar {
