@@ -1,6 +1,6 @@
 ---
 import Card from "./Card.astro";
-const { size = 16, anzPair } = Astro.props;
+const { size = 16 } = Astro.props;
 
 // Bilderpfade aus /public
 const allImages = [
@@ -50,10 +50,11 @@ const columns = size === 24 ? 6 : 4;
 </style>
 
 <script is:inline>
-  window.addEventListener("DOMContentLoaded", () => {
+  (() => {
     const board = document.querySelector(".board");
-    const pairCount = Number(board.dataset.paircount);
+    if (!board) return;
 
+    const pairCount = Number(board.dataset.paircount);
     let firstCard = null;
     let secondCard = null;
     let lock = false;
@@ -75,7 +76,7 @@ const columns = size === 24 ? 6 : 4;
     }
 
     function stopTimer() {
-      clearInterval(timer);
+      if (timer) clearInterval(timer);
     }
 
     function flipCard(card) {
@@ -99,16 +100,13 @@ const columns = size === 24 ? 6 : 4;
       }
 
       secondCard = card;
-
       moves++;
       if (movesEl) movesEl.textContent = moves;
 
       if (firstCard.dataset.value === secondCard.dataset.value) {
-        pairs++;
-
         firstCard.classList.add("matched");
         secondCard.classList.add("matched");
-
+        pairs++;
         resetTurn();
 
         if (pairs === pairCount) {
@@ -124,7 +122,6 @@ const columns = size === 24 ? 6 : 4;
         }
       } else {
         lock = true;
-
         setTimeout(() => {
           firstCard.classList.remove("flipped");
           secondCard.classList.remove("flipped");
@@ -139,8 +136,9 @@ const columns = size === 24 ? 6 : 4;
       lock = false;
     }
 
-    document.querySelectorAll(".js-card").forEach((card) => {
+    // Eventlistener setzen **nachdem alle Cards im DOM sind**
+    board.querySelectorAll(".js-card").forEach((card) => {
       card.addEventListener("click", () => flipCard(card));
     });
-  });
+  })();
 </script>

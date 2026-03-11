@@ -6,9 +6,6 @@ import "../../public/global.css";
 
 import DekoImg from "../../public/Dekoration/gras.png";
 import { Image } from "astro:assets";
-
-const time = Number(Astro.url.searchParams.get("time") ?? 0);
-const moves = Number(Astro.url.searchParams.get("moves") ?? 0);
 ---
 
 <Layout>
@@ -16,8 +13,8 @@ const moves = Number(Astro.url.searchParams.get("moves") ?? 0);
         <Popup>
             <h2>GLÜCKWUNSCH! 🎉</h2>
 
-            <p>Zeit: <span>{time}</span> Sekunden</p>
-            <p>Züge: <span>{moves}</span></p>
+            <p>Zeit: <span id="time-display">0</span> Sekunden</p>
+            <p>Züge: <span id="moves-display">0</span></p>
 
             <div class="button-wrap">
                 <LinkButton href="/" text="Erneut spielen" />
@@ -33,6 +30,17 @@ const moves = Number(Astro.url.searchParams.get("moves") ?? 0);
     </div>
 </Layout>
 
+<script is:inline>
+    // Werte aus URL holen
+    const params = new URLSearchParams(window.location.search);
+    const time = params.get("time") ?? 0;
+    const moves = params.get("moves") ?? 0;
+
+    // Werte ins DOM schreiben
+    document.getElementById("time-display").textContent = time;
+    document.getElementById("moves-display").textContent = moves;
+</script>
+
 <style>
     .end-page {
         display: flex;
@@ -41,5 +49,11 @@ const moves = Number(Astro.url.searchParams.get("moves") ?? 0);
         min-height: 100vh;
         width: 100vw;
         position: relative;
+    }
+
+    .button-wrap {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
     }
 </style>
