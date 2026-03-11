@@ -3,6 +3,8 @@ import Layout from "../layout/layout.astro";
 import Popup from "../components/Popup.astro";
 import "../../public/global.css";
 import LinkButton from "../components/LinkButton.astro";
+import DekoImg from "../../public/Dekoration/gras.png";
+import { Image } from "astro:assets";
 
 const time = Astro.url.searchParams.get("time") ?? 0;
 const moves = Astro.url.searchParams.get("moves") ?? 0;
@@ -15,21 +17,26 @@ const moves = Astro.url.searchParams.get("moves") ?? 0;
 
             <p>Zeit: <span>{time}</span> Sekunden</p>
             <p>Züge: <span>{moves}</span></p>
-
-            <LinkButton href="/" text="Erneut spielen" />
-            <LinkButton href="/leaderboard" text="In Rangliste speichern" />
+            <div class="button-wrap">
+                <LinkButton href="/" text="Erneut spielen" />
+                <LinkButton
+                    href="/leaderboard"
+                    text="In Rangliste speichern"
+                    outline
+                />
+            </div>
         </Popup>
 
-        <img src="/img/Gras.png" class="bottom-grass" />
+        <Image src={DekoImg} alt="Osterdekoration" class="bottom-decoration" />
+
+        <style>
+            .end-page {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                width: 100vw;
+            }
+        </style>
     </div>
 </Layout>
-
-<style>
-    .end-page {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        width: 100vw;
-    }
-</style>

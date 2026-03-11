@@ -1,0 +1,45 @@
+---
+import Layout from "../layout/layout.astro";
+import Popup from "../components/Popup.astro";
+import LinkButton from "../components/LinkButton.astro";
+import "../../public/global.css";
+import DekoImg from "../../public/Dekoration/decoration.png";
+import { Image } from "astro:assets";
+---
+
+<Layout>
+    <div class="login-page">
+        <Popup>
+            <h2>In Rangliste eintragen</h2>
+            <p>Mit Name und E-Mail eintragen oder als Gast fortfahren</p>
+            <input type="text" id="name" placeholder="Name" />
+            <input type="email" id="email" placeholder="E-Mail" />
+
+            <div class="button-wrap">
+                <LinkButton href="#" text="Speichern" />
+                <LinkButton href="#" text="Als Gast fortfahren" outline />
+            </div>
+        </Popup>
+    </div>
+    <Image src={DekoImg} alt="Osterdekoration" class="bottom-decoration" />
+</Layout>
+
+<style>
+    input {
+        width: 90%;
+        max-width: 400px;
+        margin: 12px auto;
+        padding: 15px 20px;
+        border-radius: 12px;
+        border: 2px solid #e0e0e0;
+        display: block;
+        font-size: 18px;
+        transition: 0.2s;
+        outline: none;
+    }
+
+    input:focus {
+        border-color: #e98989;
+        box-shadow: 0 0 8px rgba(233, 137, 137, 0.3);
+    }
+</style>

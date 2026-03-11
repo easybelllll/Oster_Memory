@@ -2,34 +2,34 @@
 import Card from "./Card.astro";
 const { size = 16 } = Astro.props;
 
+// Bilderpfade aus /public
 const allImages = [
-  "../../public/Eier/Eier1.png",
-  "../../public/Eier/Eier2.png",
-  "../../public/Eier/Eier3.png",
-  "../../public/Eier/Eier4.png",
-  "../../public/Hase/Hase1.png",
-  "../../public/Hase/Hase2.png",
-  "../../public/Hase/Karotten.png",
-  "../../public/Korb/Osterkorb1.png",
-  "../../public/Korb/Osterkorb2.png",
-  "../../public/Kueken/Kueken1.png",
-  "../../public/Kueken/Kueken2.png",
-  "../../public/Tulpen/Tulpen.png",
+  "/Eier/Eier1.png",
+  "/Eier/Eier2.png",
+  "/Eier/Eier3.png",
+  "/Eier/Eier4.png",
+  "/Hase/Hase1.png",
+  "/Hase/Hase2.png",
+  "/Hase/Karotten.png",
+  "/Korb/Osterkorb1.png",
+  "/Korb/Osterkorb2.png",
+  "/Kueken/Kueken1.png",
+  "/Kueken/Kueken2.png",
+  "/Tulpen/Tulpen.png",
 ];
 
 const pairCount = size / 2;
+
+// Karten mischen
 const shuffled = [...allImages].sort(() => Math.random() - 0.5);
 const selected = shuffled.slice(0, pairCount);
 const cards = [...selected, ...selected].sort(() => Math.random() - 0.5);
 
+// Spalten für Grid
 const columns = size === 24 ? 6 : 4;
 ---
 
-<div
-  class="board"
-  style={`grid-template-columns: repeat(${columns}, 1fr)`}
-  id="board"
->
+<div class="board" style={`grid-template-columns: repeat(${columns}, 1fr)`}>
   {cards.map((card) => <Card img={card} pair={card} />)}
 </div>
 
@@ -45,6 +45,7 @@ const columns = size === 24 ? 6 : 4;
 </style>
 
 <script is:inline>
+  // Variablen
   let firstCard = null;
   let secondCard = null;
   let lock = false;
@@ -54,16 +55,22 @@ const columns = size === 24 ? 6 : 4;
   let pairs = 0;
   let timer;
 
-  const movesSpan = document.getElementById("moves"); // Züge
-  const timeSpan = document.getElementById("time"); // Timer
-
+  // Timer starten
   function startTimer() {
     timer = setInterval(() => {
       time++;
-      if (timeSpan) timeSpan.textContent = time;
     }, 1000);
   }
 
+  // Spiel beenden
+  function endGame() {
+    clearInterval(timer); // Timer stoppen
+    localStorage.setItem("endTime", time); // Zeit speichern
+    localStorage.setItem("endMoves", moves); // Züge speichern
+    window.location.href = "/end"; // Endseite anzeigen
+  }
+
+  // Karten umdrehen
   function flipCard(card) {
     if (
       lock ||
@@ -80,16 +87,18 @@ const columns = size === 24 ? 6 : 4;
     }
 
     secondCard = card;
-
     moves++;
-    const movesSpan = document.getElementById("moves");
-    if (movesSpan) movesSpan.textContent = moves;
 
     if (firstCard.dataset.value === secondCard.dataset.value) {
       pairs++;
       firstCard.classList.add("matched");
       secondCard.classList.add("matched");
       resetTurn();
+
+      // Prüfen, ob alle Paare gefunden wurden
+      if (pairs === pairCount) {
+        setTimeout(endGame, 500); // kleine Verzögerung für Animation
+      }
     } else {
       lock = true;
       setTimeout(() => {
@@ -106,9 +115,13 @@ const columns = size === 24 ? 6 : 4;
     lock = false;
   }
 
-  document
-    .querySelectorAll(".js-card")
-    .forEach((card) => card.addEventListener("click", () => flipCard(card)));
+  // Eventlistener setzen, sobald DOM fertig ist
+  window.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".js-card").forEach((card) => {
+      card.addEventListener("click", () => flipCard(card));
+    });
+  });
 
+  // Timer starten
   startTimer();
 </script>
