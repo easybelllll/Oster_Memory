@@ -136,7 +136,6 @@ const columns = size === 24 ? 6 : 4;
       lock = false;
     }
 
-    // Eventlistener setzen **nachdem alle Cards im DOM sind**
     board.querySelectorAll(".js-card").forEach((card) => {
       card.addEventListener("click", () => flipCard(card));
     });
