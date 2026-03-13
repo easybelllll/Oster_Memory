@@ -49,7 +49,7 @@ const columns = size === 24 ? 6 : 4;
   }
 </style>
 
-<script is:inline>
+<script define:vars={{ size }} is:inline>
   (() => {
     const board = document.querySelector(".board");
     if (!board) return;
@@ -115,6 +115,7 @@ const columns = size === 24 ? 6 : 4;
           const endUrl = new URL("/end", window.location.origin);
           endUrl.searchParams.set("time", time);
           endUrl.searchParams.set("moves", moves);
+          endUrl.searchParams.set("cards", size);
 
           setTimeout(() => {
             window.location.href = endUrl.toString();

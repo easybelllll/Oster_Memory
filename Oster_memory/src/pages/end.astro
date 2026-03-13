@@ -6,6 +6,7 @@ import "../../public/global.css";
 
 import DekoImg from "../../public/Dekoration/gras.png";
 import { Image } from "astro:assets";
+import Button from "../components/Button.astro";
 ---
 
 <Layout>
@@ -19,7 +20,7 @@ import { Image } from "astro:assets";
 
             <div class="button-wrap">
                 <LinkButton href="/" text="Erneut spielen" outline />
-                <LinkButton href="/leaderboard" text="In Rangliste speichern" />
+                <Button id="leaderboardButton" text="In Rangliste speichern" />
             </div>
         </Popup>
 
@@ -28,14 +29,34 @@ import { Image } from "astro:assets";
 </Layout>
 
 <script is:inline>
-    // Werte aus URL holen
     const params = new URLSearchParams(window.location.search);
     const time = params.get("time") ?? 0;
     const moves = params.get("moves") ?? 0;
+    const cards = params.get("cards") ?? 0;
 
-    // Werte ins DOM schreiben
+    // Direkt ins DOM schreiben
     document.getElementById("time-display").textContent = time;
     document.getElementById("moves-display").textContent = moves;
+
+    const Button = document.getElementById("leaderboardButton");
+    Button.addEventListener("click", async () => {
+        const nameInput = document.getElementById("name");
+
+        const formData = new FormData();
+        formData.append("name", nameInput.value);
+        formData.append("time", time);
+        formData.append("moves", moves);
+        formData.append("cards", cards);
+
+        const response = await fetch("/api/leaderboard", {
+            method: "POST",
+            body: formData,
+        });
+
+        if (response.redirected) {
+            window.location.assign(response.url + "?cards=" + cards);
+        }
+    });
 </script>
 
 <style>
