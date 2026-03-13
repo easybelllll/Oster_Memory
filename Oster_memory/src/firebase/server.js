@@ -21,6 +21,7 @@ const initApp = () => {
         return initializeApp()
     }
     console.info('Loading service account from env.')
+    console.log(import.meta.env)
     return initializeApp({
         credential: cert(serviceAccount)
     })

@@ -15,14 +15,11 @@ import { Image } from "astro:assets";
 
             <p>Zeit: <span id="time-display">0</span> Sekunden</p>
             <p>Züge: <span id="moves-display">0</span></p>
+            <input type="text" id="name" placeholder="Name" />
 
             <div class="button-wrap">
-                <LinkButton href="/" text="Erneut spielen" />
-                <LinkButton
-                    href="/login"
-                    text="In Rangliste speichern"
-                    outline
-                />
+                <LinkButton href="/" text="Erneut spielen" outline />
+                <LinkButton href="/leaderboard" text="In Rangliste speichern" />
             </div>
         </Popup>
 
@@ -57,5 +54,22 @@ import { Image } from "astro:assets";
         display: flex;
         gap: 12px;
         margin-top: 20px;
+    }
+    input {
+        width: 90%;
+        max-width: 400px;
+        margin: 12px auto;
+        padding: 15px 20px;
+        border-radius: 12px;
+        border: 2px solid #e0e0e0;
+        display: block;
+        font-size: 18px;
+        transition: 0.2s;
+        outline: none;
+    }
+
+    input:focus {
+        border-color: #e98989;
+        box-shadow: 0 0 8px rgba(233, 137, 137, 0.3);
     }
 </style>

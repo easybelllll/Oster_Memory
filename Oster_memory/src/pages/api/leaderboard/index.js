@@ -1,6 +1,8 @@
 import { app } from "../../../firebase/server";
 import { getFirestore } from "firebase-admin/firestore";
 
+export const prerender = false;
+
 export const POST = async ({ request, redirect }) => {
     const formData = await request.formData();
     const name = formData.get("name")?.toString();
@@ -9,7 +11,7 @@ export const POST = async ({ request, redirect }) => {
     const cards = formData.get("cards")?.toString();
 
     if (!name || !time || !moves || !cards) {
-        return new Response("Missing required fields", {
+        return new Response("Ungültige Angaben", {
             status: 400,
         });
     }
