@@ -149,35 +149,55 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+
   .game-page {
     flex-direction: column;
     align-items: stretch;
   }
 
   .sidebar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
     width: 100%;
-    min-height: 0;
+    height: auto;
+    padding: 8px 12px;
+
     border-right: none;
     border-bottom: 1px solid #e0cfcf;
-    padding: 10px 0;
   }
 
-  .sidebar-buttons.top,
-  .game-info {
+  .sidebar-buttons.top {
+    display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    gap: 8px;
+  }
+
+  .game-info {
+    display: flex;
+    flex-direction: row;
     align-items: center;
+    gap: 12px;
+
+    margin-top: 0;
+    font-size: 14px;
   }
 
   .game-info span {
-    margin-left: 5px;
-    margin-bottom: 0;
+    font-size: 16px;
+    margin: 0;
   }
 
   .board {
-    width: 100%;
-    padding: 10px;
-    gap: 10px;
+    justify-content: center;
     margin: 0 auto;
+    background: white;
+    flex: 1;
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+    max-width: 900px;
   }
 }

@@ -5,7 +5,7 @@ const { links = [] } = Astro.props;
 ---
 
 <aside class="sidebar">
-  <!-- Top button(s) -->
+  <!-- Top buttons -->
   <div class="sidebar-buttons top">
     {
       links.map((link: { href: any; text: any; outline: any }) => (
@@ -35,7 +35,6 @@ const { links = [] } = Astro.props;
     background: #f8e88c;
     border-right: 1px solid #e0cfcf;
     min-width: 200px;
-    height: 100vh;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
   }
@@ -58,5 +57,10 @@ const { links = [] } = Astro.props;
     font-size: 24px;
     margin-bottom: 8px;
     font-weight: bold;
+  }
+
+  .board {
+    margin-top: 0;
+    align-self: flex-start;
   }
 </style>
