@@ -6,6 +6,30 @@ import { Image } from "astro:assets";
 import Layout from "../layout/layout.astro";
 import "../../public/global.css";
 import LinkButton from "../components/LinkButton.astro";
+import { app } from "../firebase/server";
+import { getFirestore } from "firebase-admin/firestore";
+
+interface LeaderboardEntry {
+    id: string;
+    name: string;
+    time: number;
+    moves: number;
+}
+
+const db = getFirestore(app);
+const leaderboardRef = db.collection("leaderboard").where("cards", "==", 16);
+const leaderboardSnapshot = await leaderboardRef.get();
+const leaderboard = leaderboardSnapshot.docs.map((doc) => ({
+  id: doc.id,
+  ...doc.data(),
+})) as LeaderboardEntry[];
+
+leaderboard.sort ((a, b) => {
+    if (a.time !== b.time) {
+        return a.time-b.time;
+    }
+    return a.moves-b.moves; 
+});
 ---
 
 <Layout>
@@ -18,9 +42,18 @@ import LinkButton from "../components/LinkButton.astro";
                         <th>Name</th>
                         <th>Zeit (s)</th>
                         <th>Züge</th>
-                    </tr>
+                    </tr>  
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                                       {
+leaderboard.map((leaderboardEntry) => 
+(<tr>
+                        <th>{leaderboardEntry.name}</th>
+                        <th>{leaderboardEntry.time}</th>
+                        <th>{leaderboardEntry.moves}</th>
+                    </tr>))
+                    }
+                </tbody>
             </table>
             <br />
             <div class="button-wrap">
