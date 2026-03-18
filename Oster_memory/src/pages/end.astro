@@ -34,11 +34,11 @@ import Button from "../components/Button.astro";
     const moves = params.get("moves") ?? 0;
     const cards = params.get("cards") ?? 0;
 
-    // Direkt ins DOM schreiben
     document.getElementById("time-display").textContent = time;
     document.getElementById("moves-display").textContent = moves;
 
     const Button = document.getElementById("leaderboardButton");
+
     Button.addEventListener("click", async () => {
         const nameInput = document.getElementById("name");
 
@@ -53,9 +53,9 @@ import Button from "../components/Button.astro";
             body: formData,
         });
 
-        if (response.redirected) {
-            window.location.assign(response.url + "?cards=" + cards);
-        }
+        const data = await response.json();
+
+        window.location.href = `/leaderboard?cards=${data.cards}`;
     });
 </script>
 

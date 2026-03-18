@@ -1,4 +1,5 @@
 ---
+export const prerender = false;
 import Popup from "../components/Popup.astro";
 import Button from "../components/Button.astro";
 import DekoImg from "../../public/Dekoration/gras.png";
@@ -8,28 +9,31 @@ import "../../public/global.css";
 import LinkButton from "../components/LinkButton.astro";
 import { app } from "../firebase/server";
 import { getFirestore } from "firebase-admin/firestore";
+import type Card from "../components/Card.astro";
 
 interface LeaderboardEntry {
     id: string;
     name: string;
     time: number;
     moves: number;
+    cards: number;
 }
 
 const db = getFirestore(app);
-const leaderboardRef = db.collection("leaderboard").where("cards", "==", 16);
+const categoryParam = Number(Astro.url.searchParams.get("cards") || 12);
+
+const leaderboardRef = db.collection("leaderboard").where("cards", "==", categoryParam);
 const leaderboardSnapshot = await leaderboardRef.get();
-const leaderboard = leaderboardSnapshot.docs.map((doc) => ({
+
+const leaderboard = leaderboardSnapshot.docs.map(doc => ({
   id: doc.id,
   ...doc.data(),
 })) as LeaderboardEntry[];
 
-leaderboard.sort ((a, b) => {
-    if (a.time !== b.time) {
-        return a.time-b.time;
-    }
-    return a.moves-b.moves; 
-});
+leaderboard.sort((a,b) => a.time - b.time || a.moves - b.moves);
+
+// Nur Top10
+const top10 = leaderboard.slice(0, 10);
 ---
 
 <Layout>
@@ -45,8 +49,8 @@ leaderboard.sort ((a, b) => {
                     </tr>  
                 </thead>
                 <tbody>
-                                       {
-leaderboard.map((leaderboardEntry) => 
+                                       
+{top10.map((leaderboardEntry) => 
 (<tr>
                         <th>{leaderboardEntry.name}</th>
                         <th>{leaderboardEntry.time}</th>
