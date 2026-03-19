@@ -2,7 +2,7 @@
 const { img, pair } = Astro.props;
 ---
 
-<div class="card js-card" data-value={pair}>
+<div class="card js-card" id="responsiveboard" data-value={pair}>
     <div class="card-inner">
         <div class="card-front"></div>
         <div class="card-back">
@@ -12,6 +12,9 @@ const { img, pair } = Astro.props;
 </div>
 
 <style>
+    div {
+        display: flex;
+    }
     .card {
         perspective: 900px;
         cursor: pointer;

@@ -87,15 +87,15 @@ body {
 
 /* --- Board --- */
 .board {
-  display: grid;
-  justify-content: center;
-  gap: 15px;
-  margin: 0 auto;
-  padding: 20px;
+  margin: auto;
   background: white;
   flex: 1;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 150px));
-  max-width: 800px;
+  width: 100%;
+  max-width: 900px;
+  grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+  gap: 10px;
+  align-content: center;
+  justify-content: center;
 }
 
 /* --- Cards --- */
@@ -106,7 +106,6 @@ body {
 
 .card-inner {
   width: 100%;
-  max-width: 150px;
   aspect-ratio: 1;
   transition: transform 0.6s;
   transform-style: preserve-3d;
@@ -197,17 +196,66 @@ body {
   }
 
 
-  .board {
-    display: grid;
-    justify-content: center;
-    margin: 10px auto;
-    background: white;
-    flex: 1;
-    padding: 20px;
-    width: 100%;
-    max-width: 900px;
 
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 10px;
+  #responsiveboard {
+    aspect-ratio: 1/1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+
+  .Popup {
+    width: 90%;
+    max-width: 95%;
+    padding: 16px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+
+
+  #leaderboardTable {
+    width: 100%;
+    font-size: 0.9rem;
+    border-spacing: 6px;
+  }
+
+  #leaderboardTable thead th,
+  #leaderboardTable tbody td {
+    padding: 6px 8px;
+  }
+
+  .button-wrap {
+    flex-direction: row;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  .Popup {
+    width: 0%;
+    max-width: 95%;
+    padding: 16px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  #leaderboardTable {
+    font-size: 0.85rem;
+    border-spacing: 4px;
+  }
+
+  #leaderboardTable thead th,
+  #leaderboardTable tbody td {
+    padding: 4px 6px;
+  }
+
+  .button-wrap {
+    flex-direction: row;
   }
 }

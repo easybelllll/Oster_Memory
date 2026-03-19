@@ -18,7 +18,7 @@ const { links = [] } = Astro.props;
     }
   </div>
 
-  <div class="game-info">
+  <div class="game-info" id="responsive">
     <p>Zeit</p>
     <span id="time">0</span>
     <p>Züge</p>
@@ -62,5 +62,10 @@ const { links = [] } = Astro.props;
   .board {
     margin-top: 0;
     align-self: flex-start;
+  }
+  @media (max-width: 768px) {
+    #responsive {
+      flex-direction: row;
+    }
   }
 </style>
