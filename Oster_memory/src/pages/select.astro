@@ -1,9 +1,6 @@
 ---
 import "../../public/global.css";
 import Popup from "../components/Popup.astro";
-import Button from "../components/Button.astro";
-import DekoImg from "../../public/Dekoration/Gras.png";
-import { Image } from "astro:assets";
 import LinkButton from "../components/LinkButton.astro";
 import Layout from "../layout/layout.astro";
 ---
@@ -22,5 +19,9 @@ import Layout from "../layout/layout.astro";
       <LinkButton href="/" text="Zurück" outline />
     </div>
   </Popup>
-  <Image src={DekoImg} alt="Osterdekoration" class="bottom-decoration" />
+  <img
+    src="/Dekoration/gras.png"
+    alt="Osterdekoration"
+    class="bottom-decoration"
+  />
 </Layout>

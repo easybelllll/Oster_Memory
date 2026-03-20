@@ -3,9 +3,6 @@ import Layout from "../layout/layout.astro";
 import Popup from "../components/Popup.astro";
 import LinkButton from "../components/LinkButton.astro";
 import "../../public/global.css";
-
-import DekoImg from "../../public/Dekoration/gras.png";
-import { Image } from "astro:assets";
 import Button from "../components/Button.astro";
 ---
 
@@ -25,7 +22,11 @@ import Button from "../components/Button.astro";
             </div>
         </Popup>
 
-        <Image src={DekoImg} alt="Osterdekoration" class="bottom-decoration" />
+        <img
+            src="/Dekoration/gras.png"
+            alt="Osterdekoration"
+            class="bottom-decoration"
+        />
     </div>
 </Layout>
 

@@ -1,15 +1,11 @@
 ---
 export const prerender = false;
 import Popup from "../components/Popup.astro";
-import Button from "../components/Button.astro";
-import DekoImg from "../../public/Dekoration/gras.png";
-import { Image } from "astro:assets";
 import Layout from "../layout/layout.astro";
 import "../../public/global.css";
 import LinkButton from "../components/LinkButton.astro";
 import { app } from "../firebase/server";
 import { getFirestore } from "firebase-admin/firestore";
-import type Card from "../components/Card.astro";
 
 interface LeaderboardEntry {
     id: string;
@@ -77,8 +73,8 @@ const top10 = leaderboard.slice(0, 10);
                     outline
                 />
             </div>
-            <Image
-                src={DekoImg}
+            <img
+                src="/Dekoration/gras.png"
                 alt="Osterdekoration"
                 class="bottom-decoration"
             />
