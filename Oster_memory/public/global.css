@@ -155,11 +155,8 @@ body {
     margin: 0;
   }
 
-
-
   #responsiveboard {
     aspect-ratio: 1/1;
-    max-width: calc(100% - 16px);
 
   }
 }
