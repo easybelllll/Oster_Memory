@@ -31,13 +31,16 @@ import Button from "../components/Button.astro";
 
 <script is:inline>
     const params = new URLSearchParams(window.location.search);
-    const time = params.get("time") ?? 0;
-    const moves = params.get("moves") ?? 0;
-    const cards = params.get("cards") ?? 0;
+    const time = params.get("time");
+    const moves = params.get("moves");
+    const cards = params.get("cards");
 
-    if (!time || !moves || !cards) {
+    if (time === null || moves === null || cards === null) {
         window.location.href = "/";
     }
+
+    document.getElementById("time-display").textContent = time;
+    document.getElementById("moves-display").textContent = moves;
     const Button = document.getElementById("leaderboardButton");
 
     Button.addEventListener("click", async () => {
