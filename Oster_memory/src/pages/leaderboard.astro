@@ -20,6 +20,7 @@ interface LeaderboardEntry {
 }
 
 const db = getFirestore(app);
+const validCards = [12, 16, 24];
 const categoryParam = Number(Astro.url.searchParams.get("cards") || 12);
 
 const leaderboardRef = db.collection("leaderboard").where("cards", "==", categoryParam);
@@ -37,6 +38,15 @@ const top10 = leaderboard.slice(0, 10);
 ---
 
 <Layout>
+     <script is:inline>
+        const validCardsClient = [12, 16, 24];
+        const cardsParamStr = new URLSearchParams(window.location.search).get("cards");
+        const categoryParamClient = cardsParamStr ? Number(cardsParamStr) : 12;
+
+        if (!validCardsClient.includes(categoryParamClient)) {
+            window.location.href = "/leaderboard-select";
+        }
+    </script>
     <div id="leaderboard" class="page">
         <Popup>
             <h2>Rangliste</h2>

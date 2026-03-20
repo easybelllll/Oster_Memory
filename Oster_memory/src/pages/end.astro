@@ -17,6 +17,7 @@ import Button from "../components/Button.astro";
             <p>Zeit: <span id="time-display">0</span> Sekunden</p>
             <p>Züge: <span id="moves-display">0</span></p>
             <input type="text" id="name" placeholder="Name" />
+            <span id="error-message" class="error-message"></span>
 
             <div class="button-wrap">
                 <LinkButton href="/" text="Erneut spielen" outline />
@@ -34,13 +35,22 @@ import Button from "../components/Button.astro";
     const moves = params.get("moves") ?? 0;
     const cards = params.get("cards") ?? 0;
 
-    document.getElementById("time-display").textContent = time;
-    document.getElementById("moves-display").textContent = moves;
-
+    if (!time || !moves || !cards) {
+        window.location.href = "/";
+    }
     const Button = document.getElementById("leaderboardButton");
 
     Button.addEventListener("click", async () => {
         const nameInput = document.getElementById("name");
+        const error = document.getElementById("error-message");
+
+        if (nameInput.value.trim() === "") {
+            error.textContent = "Bitte gib deinen Namen ein";
+            nameInput.classList.add("input-error");
+            return;
+        }
+        error.textContent = "";
+        nameInput.classList.remove("input-error");
 
         const formData = new FormData();
         formData.append("name", nameInput.value);
@@ -92,5 +102,16 @@ import Button from "../components/Button.astro";
     input:focus {
         border-color: #e98989;
         box-shadow: 0 0 8px rgba(233, 137, 137, 0.3);
+    }
+    .error-message {
+        color: red;
+        font-size: 14px;
+        display: block;
+        margin-top: -8px;
+        margin-bottom: 10px;
+    }
+
+    .input-error {
+        border: 2px solid red !important;
     }
 </style>
